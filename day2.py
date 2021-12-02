@@ -2,7 +2,7 @@ data = [line.split(" ") for line in open("data/day2.in", "r").readlines()]
 cmds = [(cmd, int(mag)) for cmd, mag in data]
 
 # Part 1 & 2
-pos, depth, aim = 0, 0, 0
+pos = depth = aim = 0
 for cmd, mag in cmds:
     if cmd == "forward":
         pos += mag
