@@ -1,6 +1,6 @@
 fs = require 'fs'
 
-data = fs.readFileSync 'data/day1.in', 'utf8'
+data = fs.readFileSync 'data/day01.in', 'utf8'
 sweeps = (parseInt sweep for sweep in data.split '\n')
 
 # Part 1
