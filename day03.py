@@ -26,17 +26,17 @@ print(gamma_rate * epsilon_rate)
 
 
 # Part 2
-def red(data, criterion, n=0):
+def filter_bits(data, criterion, n=0):
     if len(data) == 1:
         return data[0]
 
     column = list(zip(*data))[n]
     candidates = list(filter(lambda b: b[n] == criterion(column), data))
 
-    return red(candidates, criterion, n + 1)
+    return filter_bits(candidates, criterion, n + 1)
 
 
-oxygen_rating = bits_to_int(red(data, most_common))
-co2_rating = bits_to_int(red(data, least_common))
+oxygen_rating = bits_to_int(filter_bits(data, most_common))
+co2_rating = bits_to_int(filter_bits(data, least_common))
 
 print(oxygen_rating * co2_rating)
