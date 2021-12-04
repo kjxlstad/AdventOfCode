@@ -52,5 +52,5 @@ if __name__ == "__main__":
     )
 
     # Score first and last winning card
-    first, last = cards_won[0], cards_won[-1]
+    first, *_, last = cards_won
     print(score(*first, balls), score(*last, balls))
