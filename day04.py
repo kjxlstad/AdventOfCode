@@ -19,7 +19,7 @@ def has_won(card, balls):
     def bingo(line):
         return all(map(lambda n: n in balls, line))
 
-    lines = [row for row in card] + [col for col in zip(*card)]
+    lines = [*card, *zip(*card)]
 
     return any(bingo(line) for line in lines)
 
