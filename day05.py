@@ -9,10 +9,10 @@ def vertical_cover(line):
 
 
 def horizontal_cover(line):
-    def transpose(line):
+    def flip(line):
         return [p[::-1] for p in line]
 
-    return transpose(vertical_cover(transpose(line)))
+    return flip(vertical_cover(flip(line)))
 
 
 def diagonal_cover(line):
