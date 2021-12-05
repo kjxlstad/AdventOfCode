@@ -16,7 +16,7 @@ After which they are cleaned up a bit (while maintaining original logic) for rea
       [_________________]
      / / (_o_)   (_o_) \ \      This christmas won't be as serene
     (_(______,   ,______)_)     Santa is travelling by submarine
-   ( \      .`---'.      / )    Lots of problems there are
+   ( \      .`---'.      / )        Lots of problems there are
    ( /`~""'`  ._.  `'""~`\ )        Some quite bizzare
     (                     )     Fifty stars and you won't cause a scene
    (                       )
