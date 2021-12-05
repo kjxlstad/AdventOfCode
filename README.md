@@ -18,7 +18,7 @@ After which they are cleaned up a bit (while maintaining original logic) for rea
     (_(______,   ,______)_)     Santa is travelling by submarine
    ( \      .`---'.      / )    Lots of problems there are
    ( /`~""'`  ._.  `'""~`\ )        Some quite bizzare
-    (                     )     50 stars and you won't cause a scene
+    (                     )     Fifty stars and you won't cause a scene
    (                       )
   (                         )
   (                         )
