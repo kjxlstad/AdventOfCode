@@ -1,6 +1,6 @@
 from functools import reduce
 
-data = [line.split(" ") for line in open("data/day02.in", "r").readlines()]
+data = [line.split(" ") for line in open("data.in", "r").readlines()]
 cmds = [(cmd, int(mag)) for cmd, mag in data]
 
 

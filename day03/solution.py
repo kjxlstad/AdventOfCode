@@ -2,7 +2,7 @@ from functools import reduce
 
 data = [
     [int(bit) for bit in line.strip()]
-    for line in open("data/day03.in", "r").readlines()
+    for line in open("data.in", "r").readlines()
 ]
 
 # Part 1

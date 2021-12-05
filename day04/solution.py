@@ -42,7 +42,7 @@ def score(card, winning_turn, balls):
 
 if __name__ == "__main__":
     # Parse input data into bingo balls and cards
-    data = [line.strip() for line in open("data/day04.in", "r").readlines()]
+    data = [line.strip() for line in open("data.in", "r").readlines()]
     balls, cards = parse_data(data)
 
     # Sort cards on winning turn

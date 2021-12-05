@@ -1,6 +1,6 @@
 from operator import lt
 
-sweeps = tuple(map(int, open("data/day01.in", "r").readlines()))
+sweeps = tuple(map(int, open("data.in", "r").readlines()))
 
 
 # Part 1

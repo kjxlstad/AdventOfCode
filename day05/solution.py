@@ -62,7 +62,7 @@ def count_dangerous(lines, include_diag):
 
 
 if __name__ == "__main__":
-    data = [line.strip() for line in open("data/day05.in", "r").readlines()]
+    data = [line.strip() for line in open("data.in", "r").readlines()]
 
     # Transform each line to [[x, y], [x, y]]
     lines = [
