@@ -31,10 +31,10 @@ After which they are cleaned up a bit (while maintaining original logic) for rea
 | Day | Solution(s) | Status |
 |--:|---|---|
 | [01](https://adventofcode.com/2021/day/1) | [Python](day01/solution.py), [Coffescript](day01/solution.coffee), [Golfed](day01/solution_golf.py) | :star::star |
-| [02](https://adventofcode.com/2021/day/2) | [Python](day02/solution.py) | :star::star |
-| [03](https://adventofcode.com/2021/day/3) | [Python](day03/solution.py) | :star::star |
-| [04](https://adventofcode.com/2021/day/4) | [Python](day04/solution.py) | :star::star |
-| [05](https://adventofcode.com/2021/day/5) | [Python](day05/solution.py) | :star::star |
+| [02](https://adventofcode.com/2021/day/2) | [Python](day02/solution.py) | :star::star: |
+| [03](https://adventofcode.com/2021/day/3) | [Python](day03/solution.py) | :star::star: |
+| [04](https://adventofcode.com/2021/day/4) | [Python](day04/solution.py) | :star::star: |
+| [05](https://adventofcode.com/2021/day/5) | [Python](day05/solution.py) | :star::star: |
 | [06](https://adventofcode.com/2021/day/6) |   | :eight_pointed_black_star::eight_pointed_black_star: |
 | [07](https://adventofcode.com/2021/day/7) |   | :eight_pointed_black_star::eight_pointed_black_star: |
 | [08](https://adventofcode.com/2021/day/8) |   | :eight_pointed_black_star::eight_pointed_black_star: |
