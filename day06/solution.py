@@ -1,18 +1,18 @@
-def propagate(fishes):
+def propagate(fish):
     # Aging
-    aged_fish = {age: fishes[(age + 1) % 9] for age in range(9)}
+    aged_fish = {age: fish[(age + 1) % 9] for age in range(9)}
 
     # Spawning
-    aged_fish[6] += fishes[0]
+    aged_fish[6] += fish[0]
 
     return aged_fish
 
 
-def simulate(fishes, days_left):
+def simulate(fish, days_left):
     if not days_left:
-        return sum(fishes.values())
+        return sum(fish.values())
 
-    return simulate(propagate(fishes), days_left - 1)
+    return simulate(propagate(fish), days_left - 1)
 
 
 if __name__ == "__main__":
