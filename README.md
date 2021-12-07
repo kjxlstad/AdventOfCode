@@ -2,30 +2,30 @@
 Scripts are written dirty and hastily to try to achieve a good score morning come.
 After which they are cleaned up for readability (while mostly maintaining original logic).
 
-**Status:** 14:star:
+**Status:** 14 :star:
 
-```diff
-+                    ___
-+                   (___)
-+                    / \
-+                   /   \
-+                  /     \
-+                 /       \
-+                /         \
-+               /           \
-+               /             \
-+              /_______________\            This christmas won't be as serene
-+             [_________________]           Santa is travelling by submarine
-+            / / (_o_)   (_o_) \ \              Lots of problems there are
-+           (_(______,   ,______)_)             Some quite bizarre
-+          ( \      .`---'.      / )        Fifty stars and you won't cause a scene
-+          ( /`~""'`  ._.  `'""~`\ )       
-+           (                     )     
-+          (                       )
-+         (                         )
-+         (                         )
-+          (                       )
-+           (                     )
-+            `(                 )'
-+              `"~'---,.,---'~"`
+```
+                    ___
+                   (___)
+                    / \
+                   /   \
+                  /     \
+                 /       \
+                /         \
+               /           \
+               /             \
+              /_______________\            This christmas won't be as serene
+             [_________________]           Santa is travelling by submarine
+            / / (_o_)   (_o_) \ \              Lots of problems there are
+           (_(______,   ,______)_)             Some quite bizarre
+          ( \      .`---'.      / )        Fifty stars and you won't cause a scene
+          ( /`~""'`  ._.  `'""~`\ )       
+           (                     )     
+          (                       )
+         (                         )
+         (                         )
+          (                       )
+           (                     )
+            `(                 )'
+              `"~'---,.,---'~"`
 ```
