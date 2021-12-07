@@ -20,8 +20,9 @@ def minimum_cost(crabs, cost_func):
 if __name__ == "__main__":
     crabs = [int(pos) for pos in open("data.in", "r").read().split(",")]
 
+    # Collect crabs with common position, reduces overhead with ~40%
     crab_positions = {pos: crabs.count(pos) for pos in crabs}
 
-     # Very inefficient as of now, part 2 takes a few seconds to run
+    # Very inefficient as of now, part 2 takes a few seconds to run
     print(minimum_cost(crab_positions, constant_cost))
     print(minimum_cost(crab_positions, incremental_cost))
