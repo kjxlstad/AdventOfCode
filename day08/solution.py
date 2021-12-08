@@ -15,21 +15,16 @@ SEGMENTS = (
 )
 
 # Number of lit elements: corresponding possible displayed numbers
-NUMBERS_PER_LENGTH = {
-    2: (1,),
-    3: (7,),
-    4: (4,),
-    5: (2, 3, 5),
-    6: (0, 6, 9),
-    7: (8,),
-}
+NUMBERS_PER_LENGTH = {2: (1,), 3: (7,), 4: (4,), 5: (2, 3, 5), 6: (0, 6, 9), 7: (8,)}
 
 
 symmetric_diff = lambda sets: set(reduce(lambda p, q: p ^ q, sets))
 intersection = lambda sets: set(reduce(lambda p, q: p & q, sets))
 union = lambda sets: set(reduce(lambda p, q: p | q, sets))
-twice = lambda sets: union(sets) - symmetric_diff(sets)
+
+# Elements of three sets that appear once and twice
 once = lambda sets: symmetric_diff(sets) - intersection(sets)
+twice = lambda sets: union(sets) - symmetric_diff(sets)
 
 
 def infer_wiring(encoded):
@@ -48,32 +43,28 @@ def infer_wiring(encoded):
 def decode_number(wiring, number):
     # Calculate the lit segments for each figure
     segments = [
-        [int(any(letter in wire for letter in figure)) for wire in wiring]
-        for figure in number
+        [int(any(letter in wire for letter in figure)) for wire in wiring] for figure in number
     ]
 
     # Chain together to full number
     return reduce(
-        lambda a, b: a * 10 + b,
-        (SEGMENTS.index(tuple(segment)) for segment in segments),
+        lambda a, b: a * 10 + b, (SEGMENTS.index(tuple(segment)) for segment in segments),
     )
-
-
-def find_correspondences(inputs):
-    # Number(s): (list of) corresponding set of segments
-    correspondences = {}
-
-    for number in inputs:
-        n = NUMBERS_PER_LENGTH[len(number)]
-        correspondences[n] = correspondences.get(n, []) + [{*number}]
-
-    return correspondences
 
 
 def decode_output(line):
     inputs, output = line
 
-    correspondences = find_correspondences(inputs)
+    possible_numbers = lambda n: NUMBERS_PER_LENGTH[len(n)]
+
+    # Number(s): (list of) corresponding set of segments
+    correspondences = {
+        possible_numbers(number): [
+            {*n} for n in inputs if possible_numbers(n) == possible_numbers(number)
+        ]
+        for number in inputs
+    }
+
     wiring = infer_wiring(correspondences)
 
     return decode_number(wiring, output)
@@ -87,10 +78,10 @@ if __name__ == "__main__":
     ]
 
     # Part 1
-    print(sum(
-        len([figure for figure in output if len(figure) in {2, 3, 4, 7}])
-        for _, output in lines
-    ))
+    sum_of_known = sum(
+        len([figure for figure in output if len(figure) in {2, 3, 4, 7}]) for _, output in lines
+    )
+    print(sum_of_known)
 
     # Part 2
     print(sum(decode_output(line) for line in lines))
