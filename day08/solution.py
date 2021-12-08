@@ -59,8 +59,8 @@ def decode_output(patterns, output):
     possible_numbers = lambda pattern: NUMBERS_PER_LENGTH[len(pattern)]
 
     # Corresponding segments to input pattern
-    segments = lambda n: [
-        {*pattern} for pattern in patterns if possible_numbers(pattern) == possible_numbers(n)
+    segments = lambda p: [
+        {*pattern} for pattern in patterns if possible_numbers(pattern) == possible_numbers(p)
     ]
 
     # Number(s): (list of) corresponding set of segments
