@@ -81,10 +81,9 @@ if __name__ == "__main__":
     ]
 
     # Part 1
-    sum_of_known = sum(
+    print(sum(
         len([figure for figure in output if len(figure) in {2, 3, 4, 7}]) for _, output in lines
-    )
-    print(sum_of_known)
+    ))
 
     # Part 2
     print(sum(decode_output(line) for line in lines))
