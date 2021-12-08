@@ -20,7 +20,6 @@ SEGMENTS = (
 # Number of lit elements: corresponding possible displayed numbers
 NUMBERS_PER_LENGTH = {2: (1,), 3: (7,), 4: (4,), 5: (2, 3, 5), 6: (0, 6, 9), 7: (8,)}
 
-
 symmetric_diff = lambda sets: set(reduce(lambda p, q: p ^ q, sets))
 intersection = lambda sets: set(reduce(lambda p, q: p & q, sets))
 union = lambda sets: set(reduce(lambda p, q: p | q, sets))
@@ -43,10 +42,10 @@ def infer_wiring(encoded):
     return a, b, c, d, e, f, g
 
 
-def decode_number(wiring, number):
+def decode_pattern(wiring, output):
     # Calculate the lit segments for each figure
     segments = [
-        [int(any(letter in wire for letter in figure)) for wire in wiring] for figure in number
+        [int(any(segment in wire for segment in number)) for wire in wiring] for number in output
     ]
 
     # Chain together to full number
@@ -55,31 +54,35 @@ def decode_number(wiring, number):
     )
 
 
-def decode_output(line):
-    inputs, output = line
+def decode_output(patterns, output):
+    # Possible decoded numbers given input pattern
+    possible_numbers = lambda pattern: NUMBERS_PER_LENGTH[len(pattern)]
 
-    possible_numbers = lambda n: NUMBERS_PER_LENGTH[len(n)]
-    segments = lambda n: [{*i} for i in inputs if possible_numbers(i) == possible_numbers(n)]
+    # Corresponding segments to input pattern
+    segments = lambda n: [
+        {*pattern} for pattern in patterns if possible_numbers(pattern) == possible_numbers(n)
+    ]
 
     # Number(s): (list of) corresponding set of segments
-    correspondences = {possible_numbers(number): segments(number) for number in inputs}
+    correspondences = {possible_numbers(pattern): segments(pattern) for pattern in patterns}
 
     wiring = infer_wiring(correspondences)
 
-    return decode_number(wiring, output)
+    return decode_pattern(wiring, output)
 
 
 if __name__ == "__main__":
     # Each line contains [inputs, output]
     lines = [
-        [number.split(" ") for number in line.strip().split(" | ")]
+        [patterns.split(" ") for patterns in line.strip().split(" | ")]
         for line in open("data.in", "r").readlines()
     ]
 
-    # Part 1
+    # Part 1: Total count of number of patterns with unique lengths
     print(sum(
-        len([figure for figure in output if len(figure) in {2, 3, 4, 7}]) for _, output in lines
+        len([pattern for pattern in output if len(pattern) in {2, 3, 4, 7}])
+        for _, output in lines
     ))
 
     # Part 2
-    print(sum(decode_output(line) for line in lines))
+    print(sum(decode_output(*line) for line in lines))
