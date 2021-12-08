@@ -5,14 +5,14 @@ After which they are cleaned up for readability (while mostly maintaining origin
 **Status:** 16/50 :star:
 
 ```
-                    ___
-                   (___)
-                    / \
-                   /   \
-                  /     \
-                 /       \
-                /         \
-               /           \
+                     ___
+                    (___)
+                     / \
+                    /   \
+                   /     \
+                  /       \
+                 /         \
+                /           \
                /             \
               /_______________\            This christmas won't be as serene
              [_________________]           Santa is travelling by submarine
