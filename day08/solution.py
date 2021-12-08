@@ -1,6 +1,9 @@
 from functools import reduce
 
-# Lit segments per number, segments following  pin order convention a-g
+# Code follows standard 7-segment display pin convention a-g
+# a: top, b: upper right, c: lower left, d: bottom, e: lower left, f: upper left, g: middle
+
+# Lit segments per number
 SEGMENTS = (
     (1, 1, 1, 1, 1, 1, 0),
     (0, 1, 1, 0, 0, 0, 0),
@@ -28,16 +31,16 @@ twice = lambda sets: union(sets) - symmetric_diff(sets)
 
 
 def infer_wiring(encoded):
-    top = encoded[(7,)][0] - encoded[(1,)][0]
-    upper_right = encoded[(1,)][0] - intersection(encoded[(0, 6, 9)])
-    lower_right = encoded[(1,)][0] - upper_right
-    middle = intersection(encoded[(2, 3, 5)]) & twice(encoded[(0, 6, 9)])
-    bottom = intersection(encoded[(2, 3, 5)]) - top - middle
-    lower_left = once(encoded[(2, 3, 5)]) - encoded[(4,)][0]
-    upper_let = once(encoded[(2, 3, 5)]) & encoded[(4,)][0]
+    a = encoded[(7,)][0] - encoded[(1,)][0]
+    b = encoded[(1,)][0] - intersection(encoded[(0, 6, 9)])
+    c = encoded[(1,)][0] - b
+    g = intersection(encoded[(2, 3, 5)]) & twice(encoded[(0, 6, 9)])
+    d = intersection(encoded[(2, 3, 5)]) - a - g
+    e = once(encoded[(2, 3, 5)]) - encoded[(4,)][0]
+    f = once(encoded[(2, 3, 5)]) & encoded[(4,)][0]
 
     # Decoded segment for each actual segment
-    return top, upper_right, lower_right, bottom, lower_left, upper_let, middle
+    return a, b, c, d, e, f, g
 
 
 def decode_number(wiring, number):
