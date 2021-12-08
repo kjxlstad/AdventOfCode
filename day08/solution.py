@@ -59,14 +59,10 @@ def decode_output(line):
     inputs, output = line
 
     possible_numbers = lambda n: NUMBERS_PER_LENGTH[len(n)]
+    segments = lambda n: [{*i} for i in inputs if possible_numbers(i) == possible_numbers(n)]
 
     # Number(s): (list of) corresponding set of segments
-    correspondences = {
-        possible_numbers(number): [
-            {*n} for n in inputs if possible_numbers(n) == possible_numbers(number)
-        ]
-        for number in inputs
-    }
+    correspondences = {possible_numbers(number): segments(number) for number in inputs}
 
     wiring = infer_wiring(correspondences)
 
