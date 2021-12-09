@@ -13,10 +13,10 @@ def neighbors(x, y, bounds):
 def low_points(heightmap, bounds):
     # All points in the heightmap with height lower than all neighbors
     return [
-        (i, j)
-        for j, row in enumerate(heightmap)
-        for i, h in enumerate(row)
-        if h < min(heightmap[y][x] for x, y in neighbors(i, j, bounds))
+        (x, y)
+        for y, row in enumerate(heightmap)
+        for x, h in enumerate(row)
+        if h < min(heightmap[j][i] for i, j in neighbors(x, y, bounds))
     ]
 
 
