@@ -1,8 +1,8 @@
 from functools import reduce
 
 
-def neighbors(i, j, bounds):
-    neighbors = [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]
+def neighbors(x, y, bounds):
+    neighbors = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
 
     # Filter out neighbors outside of bounds
     return set(
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     low_points = low_points(heightmap, bounds)
 
     # Part 1
-    print(sum(heightmap[j][i] + 1 for i, j in low_points))
+    print(sum(heightmap[y][x] + 1 for x, y in low_points))
 
     # Part 2
     basins = [search_basin(heightmap, x, y) for x, y in low_points]
