@@ -36,7 +36,7 @@ def search_basin(heightmap, x, y, visited=set()):
     ]
 
     # Return union of this point and all points in sub search
-    return {(x, y)} | reduce(lambda p, q: p | q, searched, set())
+    return reduce(lambda p, q: p | q, searched, {(x, y)})
 
 
 if __name__ == "__main__":
