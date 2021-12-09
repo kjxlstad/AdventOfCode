@@ -20,23 +20,18 @@ def low_points(heightmap, bounds):
     ]
 
 
-def search_basin(heightmap, x, y, visited=set()):
-    # Gather neighbors not visited
-    not_visited = neighbors(x, y, (0, 100)) - visited
-
+def search_basin(heightmap, x, y):
     # Filter out non-increasing neighbors or neighbors with height 9
     increasing = {
-        (i, j) for i, j in not_visited if heightmap[y][x] < heightmap[j][i] < 9
+        (i, j)
+        for i, j in neighbors(x, y, (0, 100))
+        if heightmap[y][x] < heightmap[j][i] < 9
     }
 
-    # Search all neighbors with updated visited list
-    searched = [
-        search_basin(heightmap, i, j, visited | increasing | {(x, y)})
-        for i, j in increasing
-    ]
-
     # Return union of this point and all points in sub search
-    return reduce(lambda p, q: p | q, searched, {(x, y)})
+    return {(x, y)}.union(
+        *(search_basin(heightmap, i, j) for i, j in increasing)
+    )
 
 
 if __name__ == "__main__":
