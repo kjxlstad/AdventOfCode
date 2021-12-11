@@ -25,11 +25,11 @@ def parse(expression, stack="", error=False):
 
     # Opening char, parse rest with char in stack
     if first_char in OPEN:
-        return add(0, parse(rest, stack + first_char, error))
+        return parse(rest, stack + first_char, error)
 
     # Closing char pairs up with last in stack, pop and parse rest
     if (stack[-1], first_char) in zip(OPEN, CLOSE):
-        return add(0, parse(rest, stack[:-1], error))
+        return parse(rest, stack[:-1], error)
 
     # Closing char not pairing up, pop, add penalty and parse rest with error
     return add(PENALTY[first_char], parse(rest, stack[:-1], error=True))
