@@ -6,7 +6,7 @@ def cost(grid, x, y):
     i, j = x // 100, y // 100
     x, y = x % 100, y % 100
 
-    return ((grid[y][x] + i + j - 1) % 9) + 1
+    return (grid[y][x] + i + j - 1) % 9 + 1
 
 
 def neighbors(grid, x, y, bounds):
