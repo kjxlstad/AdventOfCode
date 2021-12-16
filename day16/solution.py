@@ -2,8 +2,12 @@ from operator import gt, lt, eq
 from math import prod
 
 
-def unpack(func): return lambda v: int(func(*v))
-def hex_to_bin(hex): return bin(int(hex, 16))[2:].zfill(4)
+def unpack(func):
+    return lambda v: int(func(*v))
+
+
+def hex_to_bin(hex):
+    return bin(int(hex, 16))[2:].zfill(4)
 
 
 OPERATORS = {
@@ -32,12 +36,11 @@ class Stream:
 
 def decode_literal(stream):
     def decode():
-        literal = stream.consume(5)
-
-        if literal[0] == "1":
-            return literal[1:5] + decode()
-
-        return literal[1:5]
+        return (
+            stream.consume(4) + decode()
+            if stream.consume(1) == "1"
+            else stream.consume(4)
+        )
 
     return int(decode(), 2)
 
