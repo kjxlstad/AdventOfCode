@@ -28,8 +28,7 @@ class Stream:
         self.version_total = 0
 
     def consume(self, n):
-        consumed, rest = self.bits[:n], self.bits[n:]
-        self.bits = rest
+        consumed, self.bits = self.bits[:n], self.bits[n:]
         self.i += n
         return consumed
 
@@ -48,11 +47,11 @@ def decode_literal(stream):
 def decode_operator(stream, operator):
     prefix = stream.consume(1)
 
-    if prefix == "1":
+    if int(prefix):
         num_sub_packets = int(stream.consume(11), 2)
         sub_packets = [decode_packet(stream) for _ in range(num_sub_packets)]
 
-    elif prefix == "0":
+    else:
         sub_packet_length = int(stream.consume(15), 2)
 
         def read(end):
@@ -65,13 +64,12 @@ def decode_operator(stream, operator):
 
 def decode_packet(stream):
     stream.version_total += int(stream.consume(3), 2)
-
     type_id = int(stream.consume(3), 2)
 
-    if type_id != 4:
-        return decode_operator(stream, OPERATORS[type_id])
+    if type_id == 4:
+        return decode_literal(stream)
 
-    return decode_literal(stream)
+    return decode_operator(stream, OPERATORS[type_id])
 
 
 if __name__ == "__main__":
