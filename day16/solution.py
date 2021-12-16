@@ -63,8 +63,7 @@ def decode_operator(stream, operator):
 
 
 def decode_packet(stream):
-    version = stream.consume(3)
-    stream.version_total += int(version, 2)
+    stream.version_total += int(stream.consume(3), 2)
 
     type_id = int(stream.consume(3), 2)
 
