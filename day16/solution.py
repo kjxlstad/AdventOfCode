@@ -1,8 +1,10 @@
 from operator import gt, lt, eq
 from math import prod
-from itertools import takewhile, repeat
 
-unpack = lambda func: lambda v: int(func(*v))
+
+def unpack(func): return lambda v: int(func(*v))
+def hex_to_bin(hex): return bin(int(hex, 16))[2:].zfill(4)
+
 
 OPERATORS = {
     0: sum,
@@ -13,10 +15,6 @@ OPERATORS = {
     6: unpack(lt),
     7: unpack(eq),
 }
-
-
-def hex_to_bin(hex):
-    return bin(int(hex, 16))[2:].zfill(4)
 
 
 class Stream:
@@ -33,15 +31,15 @@ class Stream:
 
 
 def decode_literal(stream):
-    def decode(bits):
+    def decode():
         literal = stream.consume(5)
 
         if literal[0] == "1":
-            return literal[1:5] + decode(stream)
+            return literal[1:5] + decode()
 
         return literal[1:5]
 
-    return int(decode(stream), 2)
+    return int(decode(), 2)
 
 
 def decode_operator(stream, operator):
