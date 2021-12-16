@@ -49,8 +49,8 @@ def decode_operator(stream, operator):
     prefix = stream.consume(1)
 
     if prefix == "1":
-        sub_packets = int(stream.consume(11), 2)
-        v = [decode_packet(stream) for _ in range(sub_packets)]
+        num_sub_packets = int(stream.consume(11), 2)
+        sub_packets = [decode_packet(stream) for _ in range(num_sub_packets)]
 
     elif prefix == "0":
         sub_packet_length = int(stream.consume(15), 2)
@@ -58,9 +58,9 @@ def decode_operator(stream, operator):
         def read(end):
             return [decode_packet(stream)] + read(end) if stream.i < end else []
 
-        v = read(stream.i + sub_packet_length)
+        sub_packets = read(stream.i + sub_packet_length)
 
-    return operator(v)
+    return operator(sub_packets)
 
 
 def decode_packet(stream):
