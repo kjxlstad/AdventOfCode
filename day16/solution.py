@@ -36,9 +36,7 @@ class Stream:
 def decode_literal(stream):
     def decode():
         return (
-            stream.consume(4) + decode()
-            if stream.consume(1) == "1"
-            else stream.consume(4)
+            stream.consume(4) + decode() if int(stream.consume(1)) else stream.consume(4)
         )
 
     return int(decode(), 2)
@@ -50,7 +48,6 @@ def decode_operator(stream, operator):
     if int(prefix):
         num_sub_packets = int(stream.consume(11), 2)
         sub_packets = [decode_packet(stream) for _ in range(num_sub_packets)]
-
     else:
         sub_packet_length = int(stream.consume(15), 2)
 
