@@ -34,29 +34,27 @@ class Stream:
 
 
 def decode_literal(stream):
-    def decode():
-        return (
-            stream.consume(4) + decode() if int(stream.consume(1)) else stream.consume(4)
-        )
+    if int(stream.consume(1)):
+        return stream.consume(4) + decode_literal(stream)
 
-    return int(decode(), 2)
+    return stream.consume(4)
 
 
 def decode_operator(stream, operator):
     prefix = stream.consume(1)
 
     if int(prefix):
-        num_sub_packets = int(stream.consume(11), 2)
-        sub_packets = [decode_packet(stream) for _ in range(num_sub_packets)]
+        num_subpackets = int(stream.consume(11), 2)
+        subpackets = [decode_packet(stream) for _ in range(num_subpackets)]
     else:
-        sub_packet_length = int(stream.consume(15), 2)
+        subpacket_length = int(stream.consume(15), 2)
 
         def read(end):
             return [decode_packet(stream)] + read(end) if stream.i < end else []
 
-        sub_packets = read(stream.i + sub_packet_length)
+        subpackets = read(stream.i + subpacket_length)
 
-    return operator(sub_packets)
+    return operator(subpackets)
 
 
 def decode_packet(stream):
@@ -64,7 +62,7 @@ def decode_packet(stream):
     type_id = int(stream.consume(3), 2)
 
     if type_id == 4:
-        return decode_literal(stream)
+        return int(decode_literal(stream), 2)
 
     return decode_operator(stream, OPERATORS[type_id])
 
