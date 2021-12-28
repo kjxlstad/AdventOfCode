@@ -43,11 +43,11 @@ def explode(num):
     return True, start + [number(0, left.depth - 1)] + end
 
 
-def split(n):
-    to_split = [(i, num) for i, num in enumerate(n) if num.value >= 10]
+def split(num):
+    to_split = [(i, num) for i, num in enumerate(num) if num.value >= 10]
 
     if not len(to_split):
-        return False, n
+        return False, num
 
     i, num = to_split[0]
 
@@ -56,38 +56,38 @@ def split(n):
         number(ceil(num.value / 2), num.depth + 1),
     ]
 
-    return True, n[:i] + insert + n[i + 1 :]
+    return True, num[:i] + insert + num[i + 1 :]
 
 
 def add(a, b):
-    def reduce(n):
+    def reduce(num):
         for action in (explode, split):
-            changed, n = action(n)
+            changed, num = action(num)
             if changed:
-                return reduce(n)
+                return reduce(num)
 
-        return n
+        return num
 
     return reduce([number(num.value, num.depth + 1) for num in a + b])
 
 
-def magnitude(n):
-    if not len(n):
-        return n[0][0]
+def magnitude(num):
+    if not len(num):
+        return num[0][0]
 
     pairs = [
         (i, left, right)
-        for i, (left, right) in enumerate(zip(n, n[1:]))
+        for i, (left, right) in enumerate(zip(num, num[1:]))
         if left.depth == right.depth
     ]
 
     if not len(pairs):
-        return n[0][0]
+        return num[0][0]
 
     i, left, right = pairs[0]
     insert = [number(left.value * 3 + right.value * 2, left.depth - 1)]
 
-    return magnitude(n[:i] + insert + n[i + 2 :])
+    return magnitude(num[:i] + insert + num[i + 2 :])
 
 
 if __name__ == "__main__":
