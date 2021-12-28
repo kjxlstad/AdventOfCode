@@ -40,7 +40,7 @@ if __name__ == "__main__":
     image = {
         (i, j)
         for j, line in enumerate(image.split("\n"))
-        for i, p in enumerate(list(line))
+        for i, p in enumerate(line)
         if p == "#"
     }
 
