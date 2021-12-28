@@ -36,10 +36,12 @@ def parse_algo(algo):
 
 if __name__ == "__main__":
     algo, image = open("data.in", "r").read().split("\n\n")
-    image = [[symbol for symbol in list(line)] for line in image.split("\n")]
 
     image = {
-        (i, j) for j, line in enumerate(image) for i, p in enumerate(line) if p == "#"
+        (i, j)
+        for j, line in enumerate(image.split("\n"))
+        for i, p in enumerate(list(line))
+        if p == "#"
     }
 
     algo = parse_algo(algo)
