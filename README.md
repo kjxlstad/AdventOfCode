@@ -2,7 +2,7 @@
 Scripts are written dirty and hastily to try to achieve a good score morning come.
 After which they are cleaned up for readability (while mostly maintaining original logic).
 
-**Status:** 34/50 :star:
+**Status:** 47/50 :star:
 
 ```
                      ___
