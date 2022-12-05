@@ -1,31 +1,36 @@
-# :christmas_tree: 2021 Advent of Code :christmas_tree:
+# :christmas_tree: Advent of Code :christmas_tree:
 Scripts are written dirty and hastily to try to achieve a good score morning come.
 After which they are cleaned up for readability (while mostly maintaining original logic).
 
-**Status:** 47/50 :star:
+**Status 2021:** 47/50 :star:
+
+**Status 2022:** 10/50 :star:
 
 ```
-                     ___
-                    (___)
-                     / \
-                    /   \
-                   /     \
-                  /       \
-                 /         \
-                /           \
-               /             \
-              /_______________\            This christmas won't be as serene
-             [_________________]           Santa is travelling by submarine
-            / / (_o_)   (_o_) \ \              Lots of problems there are
-           (_(______,   ,______)_)             Some quite bizarre
-          ( \      .`---'.      / )        Fifty stars and you won't cause a scene
-          ( /`~""'`  ._.  `'""~`\ )       
-           (                     )     
-          (                       )
-         (                         )
-         (                         )
-          (                       )
-           (                     )
-            `(                 )'
-              `"~'---,.,---'~"`
+       _____________,--,
+      | | | | | | |/ .-.\   HANG IN THERE
+      |_|_|_|_|_|_/ /   `.      SANTA
+       |_|__|__|_; |      \
+       |___|__|_/| |     .'`}
+       |_|__|__/ | |   .'.'`\
+       |__|__|/  ; ;  / /    \.-"-.
+       ||__|_;   \ \  ||    /`___. \
+       |_|___/\  /;.`,\\   {_'___.;{}
+       |__|_/ `;`__|`-.;|  |C` e e`\
+       |___`L  \__|__|__|  | `'-o-' }
+       ||___|\__)___|__||__|\   ^  /`\
+       |__|__|__|__|__|_{___}'.__.`\_.'}
+       ||___|__|__|__|__;\_)-'`\   {_.-;
+       |__|__|__|__|__|/` (`\__/     '-'
+       |_|___|__|__/`      |
+-------|__|___|__/`         \-------------------
+-.__.-.|___|___;`            |.__.-.__.-.__.-.__
+  |     |     ||             |  |     |     |
+-' '---' '---' \             /-' '---' '---' '--
+     |     |    '.        .' |     |     |     |
+'---' '---' '---' `-===-'`--' '---' '---' '---'
+  |     |     |     |     |     |     |     |
+-' '---' '---' '---' '---' '---' '---' '---' '--
+     |     |     |     |     |     |     |     |
+'---' '---' '---' '---' '---' '---' '---' '---'
 ```
