@@ -1,11 +1,11 @@
 from argparse import ArgumentParser
 import requests
 from os import path, makedirs
-from markdownify import markdownify
 import re
-from datetime import datetime
+from datetime import datetime, date
 from time import sleep
 
+from markdownify import markdownify
 
 def fetch_session_id():
     with open("config", "r") as f:
@@ -70,15 +70,16 @@ def wait_for_opening(n):
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument("day", type=int)
-    return parser.parse_args().day
+    parser.add_argument("--year", type=int, default=date.today().year)
+    parser.add_argument("--day", type=int, default=date.today().day)
+    return parser.parse_args()
 
 
 if __name__ == "__main__":
-    day = parse_args()
+    args = parse_args()
 
-    url = f"https://adventofcode.com/2021/day/{day}"
-    folder = f"day{day:02d}"
+    url = f"https://adventofcode.com/{args.year}/day/{args.day}"
+    folder = f"{args.year}/day{args.day:02d}"
 
     session = fetch_session_id()
 
