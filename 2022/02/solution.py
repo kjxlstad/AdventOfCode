@@ -3,10 +3,6 @@ def parse(line):
     return ord(play) - 65, ord(strat) - 88
 
 
-def score(shape, outcome):
-    return shape % 3 + 1 + (3, 0, 6)[outcome]
-
-
 def score_conter(play, counter):
     outcome = (play - counter) % 3
     return counter % 3 + 1 + (3, 0, 6)[outcome]
