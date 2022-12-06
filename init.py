@@ -79,7 +79,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     url = f"https://adventofcode.com/{args.year}/day/{args.day}"
-    folder = f"{args.year}/day{args.day:02d}"
+    folder = f"{args.year}/{args.day:02d}"
 
     session = fetch_session_id()
 
