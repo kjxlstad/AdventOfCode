@@ -34,7 +34,3 @@ if __name__ == "__main__":
 
     # Part 2
     print(type_sum(duplicates(groups(rucksacks))))
-
-
-# Part 2 golf
-# print(sum((ord(max(x&y&z))-96)%58 for x,y,z in zip(*[map(set,open("data.in.txt"))]*3)))

@@ -13,7 +13,7 @@ def processed_before_marker(datastream, markersize):
     chunks = nth_wise(datastream, markersize)
     processed = next(i for i, c in enumerate(chunks) if len(set(c)) == len(c))
     return processed + markersize
-    
+
 
 if __name__ == "__main__":
     with open("data.in", "r") as f:
