@@ -10,12 +10,10 @@ def nth_wise(iterable, n):
 
 
 def processed_before_marker(datastream, markersize):
-    chuncks = nth_wise(datastream, markersize)
-    return (
-        next(i for i, v in enumerate(chuncks) if len(set(v)) == len(v))
-        + markersize
-    )
-
+    chunks = nth_wise(datastream, markersize)
+    processed = next(i for i, c in enumerate(chunks) if len(set(c)) == len(c))
+    return processed + markersize
+    
 
 if __name__ == "__main__":
     with open("data.in", "r") as f:
