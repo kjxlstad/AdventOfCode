@@ -1,6 +1,6 @@
 from operator import mul
 from functools import reduce, partial
-from itertools import takewhile
+
 
 def scan(x, y, heightmap):
     # over, right, under, left
@@ -25,10 +25,7 @@ def view_distance(height, sightline):
     if not sightline:
         return 0
 
-    return 1 + (
-        view_distance(height, sightline[1:]) 
-        if sightline[0] < height else 0
-    )
+    return 1 + (view_distance(height, sightline[1:]) if sightline[0] < height else 0)
 
 
 def scenic_score(x, y, heightmap):
