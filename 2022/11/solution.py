@@ -24,13 +24,6 @@ class Monkey:
         return self.recipients[w % self.divisor == 0]
 
 
-def lcm(*numbers):
-    def gcd(a, b):
-        return gcd(b, a % b) if b else a
-
-    return reduce(lambda acc, n: (acc * n) // gcd(acc, n), numbers, 1)
-
-
 def round(monkeys, worry_reducer):
     for m in monkeys:
         while len(m.items):
@@ -55,5 +48,5 @@ if __name__ == "__main__":
     print(monkey_business(deepcopy(monkeys), 20, lambda w: w // 3))
 
     # Part 2
-    div = lcm(*[m.divisor for m in monkeys])
+    div = reduce(lambda acc, m: acc * m.divisor, monkeys, 1)
     print(monkey_business(monkeys, 10000, lambda w: w % div))
