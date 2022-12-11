@@ -4,7 +4,7 @@ After which they are cleaned up for readability (while mostly maintaining origin
 
 **Status 2021:** 47/50 :star:
 
-**Status 2022:** 20/50 :star:
+**Status 2022:** 22/50 :star:
 
 ```
        _____________,--,
