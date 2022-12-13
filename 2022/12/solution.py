@@ -12,13 +12,6 @@ def find(heightmap, char):
 
 def elevation(heightmap, x, y):
     char = heightmap[y][x]
-    if char == "S": return ord("a")
-    if char == "E": return ord("z")
-    return ord(char)
-
-
-def elevation(heightmap, x, y):
-    char = heightmap[y][x]
     return ord({"S": "a", "E": "z"}.get(char, char))
 
 
