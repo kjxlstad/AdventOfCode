@@ -17,6 +17,11 @@ def elevation(heightmap, x, y):
     return ord(char)
 
 
+def elevation(heightmap, x, y):
+    char = heightmap[y][x]
+    return ord({"S": "a", "E": "z"}.get(char, char))
+
+
 def neighbors(heightmap, x, y):
     w, h = len(heightmap[0]), len(heightmap)
     all_neighbors = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
