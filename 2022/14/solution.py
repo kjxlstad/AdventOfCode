@@ -42,11 +42,12 @@ def poured_until_full(rocks):
     return fill(500, 0)
 
 
-with open("data.in", "r") as f:
-    points = [
-        [tuple(map(int, point.split(","))) for point in line.split("->")]
-        for line in f.read().split("\n")
-    ]
+if __name__ == "__main__":
+    with open("data.in", "r") as f:
+        points = [
+            [tuple(map(int, point.split(","))) for point in line.split("->")]
+            for line in f.read().split("\n")
+        ]
 
     segments = chain.from_iterable(pairwise(line) for line in points)
 
