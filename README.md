@@ -1,7 +1,4 @@
 # :christmas_tree: Advent of Code :christmas_tree:
-Scripts are written dirty and hastily to try to achieve a good score morning come.
-After which they are cleaned up for readability (while mostly maintaining original logic).
-
 **2021:** 47/50 :star:
 
 **2022:** 34/50 :star:
