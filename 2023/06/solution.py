@@ -34,7 +34,7 @@ def combine_race_stats(races):
     return join(times), join(records)
 
 
-def quadratic(a, b, c):
+def quadratic_formula(a, b, c):
     disriminant = sqrt(b**2 - 4 * a * c)
 
     return ((-b + disriminant) / (2 * a), (-b - disriminant) / (2 * a))
@@ -44,7 +44,7 @@ def num_records_fast(time, record):
     # number of new records is equal to the number of whole number solutions
     # to the inequality x(t - x) > d, where x is the button press time.
     # Solve for roots of the quadratic equation -x^2 + tx - d = 0
-    root_0, root_1 = quadratic(-1, time, -record)
+    root_0, root_1 = quadratic_formula(-1, time, -record)
 
     # Add epsilon to ignore whole numbered roots
     epsilon = ulp(0)
