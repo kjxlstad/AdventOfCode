@@ -1,9 +1,9 @@
-# :christmas_tree: Advent of Code :christmas_tree:
+# 🎄 Advent of Code 🎄
 **2021:** 47/50 :star:
 
 **2022:** 34/50 :star:
 
-**2023:** 12/50 :star:
+**2023:** 14/50 :star:
 
 ```
                                          ,;7,
