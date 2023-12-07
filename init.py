@@ -1,18 +1,13 @@
 from argparse import ArgumentParser
-import requests
-from os import path, makedirs
+from datetime import date
+from pathlib import Path
 import re
-from datetime import datetime, date
-from time import sleep
 
 from markdownify import markdownify
-
-def fetch_session_id():
-    with open("config", "r") as f:
-        return f.read()
+import requests
 
 
-def write_problem(url, folder):
+def fetch_description(url):
     response = requests.get(url)
     response.raise_for_status()
 
@@ -20,58 +15,58 @@ def write_problem(url, folder):
         "\n"
     )
 
-    problem = markdownify("\n".join(content[2:-3]))
+    problem_desc = markdownify("\n".join(content[2:-3]))
+    problem_desc = problem_desc.replace("\n\n", "\n")
 
-    problem_path = path.join(folder, "problem.md")
+    return "# " + problem_desc
+
+
+def write_description(desc, folder):
+    problem_path = folder / "problem.md"
 
     with open(problem_path, "w") as f:
-        f.write(problem)
+        f.write(desc)
 
     print(f"Wrote problem description to {problem_path}")
+
+
+def write_example(desc, folder):
+    # match any content between ticks after a sentence containg "[E/e]xample"
+    pattern = r"(?i)example.*?\n```\n(.*?)\n```"
+
+    test_path = folder / "test.in"
+    if example := re.search(pattern, desc, re.DOTALL):
+        with open(test_path, "w") as f:
+            f.write(example.group(1))
+
+        print(f"Wrote example to {test_path}")
 
 
 def write_input(url, session_id, folder):
     response = requests.get(f"{url}/input", cookies={"session": session_id})
     response.raise_for_status()
 
-    input_path = path.join(folder, "data.in")
+    input_path = folder / "data.in"
 
     with open(input_path, "w") as f:
-        f.write(response.text)
+        f.write(response.text.rstrip("\n"))
 
     print(f"Wrote input file to {input_path}")
 
 
 def touch_solution(folder):
-    solution_path = path.join(folder, "solution.py")
+    solution_path = folder / "solution.py"
 
     with open(solution_path, "a+") as f:
         f.write("")
 
-    print(f"Created empty solution in {solution_path}")
-
-
-def wait_for_opening(n):
-    current_time = datetime.now()
-    opening_time = current_time.replace(hour=6, minute=0, second=0)
-    time_to_opening = (opening_time - current_time).total_seconds()
-
-    if time_to_opening > 0:
-        print(f"Problem opens in {time_to_opening} s, waiting for opening")
-
-        sleep(time_to_opening - (n + 1))
-
-        for remaining_seconds in range(n, 0, -1):
-            sleep(1)
-            print(remaining_seconds)
-
-        print("Go time!")
+    print(f"Wrote empty solution in {solution_path}")
 
 
 def parse_args():
     parser = ArgumentParser()
+    parser.add_argument("day", type=int)
     parser.add_argument("--year", type=int, default=date.today().year)
-    parser.add_argument("--day", type=int, default=date.today().day)
     return parser.parse_args()
 
 
@@ -79,15 +74,16 @@ if __name__ == "__main__":
     args = parse_args()
 
     url = f"https://adventofcode.com/{args.year}/day/{args.day}"
-    folder = f"{args.year}/{args.day:02d}"
+    folder = Path(f"{args.year}/{args.day:02d}")
 
-    session = fetch_session_id()
+    session = open(".session", "r").read().strip()
 
-    wait_for_opening(5)
+    desc = fetch_description(url)
 
-    if not path.isdir(folder):
-        makedirs(folder)
-        write_input(url, session, folder)
+    folder.mkdir(exist_ok=True)
+    write_input(url, session, folder)
+    write_example(desc, folder)
+    write_description(desc, folder)
+
+    if not (folder / "solution.py").exists():
         touch_solution(folder)
-
-    write_problem(url, folder)
