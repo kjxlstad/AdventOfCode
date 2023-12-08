@@ -1,15 +1,18 @@
-import re
 from functools import reduce
 from operator import mul
 from math import ceil, floor, ulp, sqrt
 
 
-def parse_poster(poster, ignore_spaces=True):
-    def parse_nums(line):
-        return [int(x) for x in re.findall(r"\d+", line)]
+def parse_line(line, ignore_spaces):
+    _, *nums = line.split()
+    if ignore_spaces:
+        nums = ["".join(nums)]
+    return [int(n) for n in nums]
 
-    line_0, line_1 = poster.read().split("\n")
-    return list(zip(*[parse_nums(line_0), parse_nums(line_1)]))
+
+def parse_poster(poster, ignore_spaces=False):
+    lines = poster.split("\n")
+    return list(zip(*map(lambda l: parse_line(l, ignore_spaces), lines)))
 
 
 def distance_traveled(total_time, button_time):
@@ -24,14 +27,6 @@ def num_records(time, current_record):
         for button_time in range(time - 1)
         if distance_traveled(time, button_time) > current_record
     )
-
-
-def combine_race_stats(races):
-    def join(nums):
-        return int("".join(str(x) for x in nums))
-
-    times, records = zip(*races)
-    return join(times), join(records)
 
 
 def quadratic_formula(a, b, c):
@@ -52,11 +47,13 @@ def num_records_fast(time, record):
 
 
 if __name__ == "__main__":
-    with open("data.in", "r") as poster:
-        races = parse_poster(poster)
+    with open("data.in", "r") as content:
+        poster = content.read()
 
     # Part 1
+    races = parse_poster(poster)
     print(reduce(mul, (num_records(time, record) for time, record in races)))
 
     # Part 2
-    print(num_records_fast(*combine_race_stats(races)))
+    [(time, record)] = parse_poster(poster, ignore_spaces=True)
+    print(num_records_fast(time, record))
