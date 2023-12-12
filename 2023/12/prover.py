@@ -32,18 +32,18 @@ def add_constraints(solver, springs, groups):
             ]
             solver.add(Or(filled_constraints))
 
-    # Encode constraints
-    for i in range(num_groups):
+    # Encode constraint
+    for start, end, group in zip(group_starts, group_ends, groups):
         # All starts must be on [0, N)
-        solver.add(0 <= group_starts[i], group_starts[i] < N)
+        solver.add(0 <= start, start < N)
         # All ends must be on [0, N)
-        solver.add(0 <= group_ends[i], group_ends[i] < N)
+        solver.add(0 <= end, end < N)
         # Difference between start and end is group size minus one
-        solver.add(group_ends[i] - group_starts[i] == groups[i] - 1)
+        solver.add(end - start == group - 1)
 
     # The gap between the end of one group and the start of the next >= 2
-    for i in range(num_groups - 1):
-        solver.add(group_starts[i + 1] >= group_ends[i] + 2)
+    for end_prev, start_next in zip(group_ends[:-1], group_starts[1:]):
+        solver.add(end_prev + 2 <= start_next)
 
     return group_starts, group_ends
 
