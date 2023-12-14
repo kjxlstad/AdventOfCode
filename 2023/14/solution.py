@@ -1,4 +1,5 @@
 from itertools import count
+from functools import reduce, partial
 
 
 def transpose(platform):
@@ -9,45 +10,34 @@ def rotate(platform):
     return transpose(platform)[::-1]
 
 
-def as_transposed(func, matrix, *args):
+def as_transposed(func):
     # Transpose before and after to use roll_west as roll_south
-    return transpose(func(transpose(matrix), *args))
+    def wrapper(matrix, *args):
+        return transpose(func(transpose(matrix), *args))
+    return wrapper
 
 
-def window(row):
-    padded = (None, *row, None)
-    return zip(padded, padded[1:], padded[2:])
-
-
-def next_state(prev, curr, next):
-    match curr:
-        case "O": return "." if prev == "." else "O"
-        case ".": return "O" if next == "O" else "."
-        case "#": return "#"
-
-
-def roll_row(row):
-    new = [next_state(*state) for state in window(row)]
-    return row if row == new else roll_row(new)
-
-
-def roll_west(platform):
-    return [roll_row(row) for row in platform]
+def tilt_west(platform):
+    def roll(part):
+        return "O" * part.count("O") + "." * part.count(".")
+    
+    return [
+        "#".join(roll(part) for part in "".join(row).split("#"))
+        for row in platform
+    ]
 
 
 def load(platform):
     return sum(
-        row.count("O") * (len(row) - i)
-        for i, row in enumerate(platform)
+        row.count("O") * (len(row) - i) for i, row in enumerate(platform)
     )
 
 
 def cycle_once(platform):
-    for _ in "NWSE":
-        platform = rotate(roll_west(platform))
-    return platform
+    return reduce(lambda p, _: rotate(tilt_west(p)), "NWSE", platform)
 
 
+@as_transposed
 def cycle(platform, n):
     seen = [platform]
 
@@ -67,7 +57,8 @@ if __name__ == "__main__":
         platform = [list(row) for row in platform.read().split("\n")]
 
     # Part 1
-    print(load(as_transposed(roll_west, platform)))
+    tilt_north = as_transposed(tilt_west)
+    print(load(tilt_north(platform)))
 
     # Part 2
-    print(load(as_transposed(cycle, platform, 1_000_000_000)))
+    print(load(cycle(platform, 1_000_000_000)))
