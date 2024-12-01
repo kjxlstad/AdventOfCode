@@ -17,6 +17,8 @@ if __name__ == "__main__":
 
     puzzle = get_puzzle(year=args.year, day=args.day, block=True)
 
+    puzzle.view()
+
     puzzle_dir = Path(str(args.year)) / f"{args.day:02d}"
     puzzle_dir.mkdir(parents=True, exist_ok=True)
 
