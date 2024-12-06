@@ -1,14 +1,8 @@
-Reports ← ⊜(□⊜⋕≠@ .)≠@\n. &fras "data.in"
-
-Strict  ← >0+ ∩/× ⊃(/>|/<)
-InRange ← /×× ⊃(≥1|≤3) ⌵/-
-Safe    ← ×⊃(Strict|InRange) ⍉◫2
-
-Variations ← ≡(▽≠0.) ⍉× ¬⊞=.⇡⧻.
-Dampened   ← >0/+≡Safe Variations
+Reports    ← ⊜(□⊜⋕≠@ .)≠@\n. &fras "data.in"
+Diffs      ← ◴≡/-◫₂
+Safe       ← ↥∩(/×∈) ¯,,1_2_3 Diffs
+AlmostSafe ← /↥≡(Safe▽≠0.) ⍉×⊞≠.⇡⧻.
 
 P₁ ← °□/+⍚Safe
-
-P₂ ← °□/+⍚Dampened
-
-∩&p ⊃P₁P₂ Reports
+P₂ ← °□/+⍚AlmostSafe
+∩&p⊃P₁P₂ Reports
