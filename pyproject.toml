@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+
+
+[tool.ruff.lint]
+select =  ["E", "F", "I", "N", "W"]
+ignore = [
+    "E701", # multiple statements on one line, if bar: return foo
+    "E741", # ambiguous variable name 'l', nice in some cases
+    "E731", # do not assign a lambda expression, i was crazy once stop complaining
+]
