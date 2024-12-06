@@ -1,5 +1,5 @@
 from collections import defaultdict, namedtuple
-from heapq import heappush, heappop
+from heapq import heappop, heappush
 
 Point = namedtuple("Point", ["x", "y"])
 

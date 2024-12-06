@@ -1,5 +1,5 @@
-from itertools import combinations
 from functools import partial
+from itertools import combinations
 
 
 def find_empty_rows(image):

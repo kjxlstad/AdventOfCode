@@ -1,5 +1,5 @@
-from itertools import chain
 from collections import deque, namedtuple
+from itertools import chain
 
 Point = namedtuple("Point", ["x", "y"])
 
@@ -7,11 +7,11 @@ Point = namedtuple("Point", ["x", "y"])
 N, E, S, W = Point(0, -1), Point(+1, 0), Point(0, +1), Point(-1, 0)
 
 REFLECTIONS = {
-    ".":  { N: [N],    E: [E],    S: [S],    W: [W]    },
-    "/":  { N: [E],    E: [N],    S: [W],    W: [S]    },
-    "\\": { N: [W],    E: [S],    S: [E],    W: [N]    },
-    "|":  { N: [N],    E: [N, S], S: [S],    W: [N, S] },
-    "-":  { N: [E, W], E: [E],    S: [E, W], W: [W]    },
+    ".": {N: [N], E: [E], S: [S], W: [W]},
+    "/": {N: [E], E: [N], S: [W], W: [S]},
+    "\\": {N: [W], E: [S], S: [E], W: [N]},
+    "|": {N: [N], E: [N, S], S: [S], W: [N, S]},
+    "-": {N: [E, W], E: [E], S: [E, W], W: [W]},
 }
 
 
@@ -38,9 +38,9 @@ def fire_laser(grid, pos, vel):
 
 def starting_configurations(grid):
     w, h = len(grid[0]), len(grid)
-    
-    west  = ((Point(0 + 0, y), E) for y in range(h))
-    east  = ((Point(w - 1, y), W) for y in range(h))
+
+    west = ((Point(0 + 0, y), E) for y in range(h))
+    east = ((Point(w - 1, y), W) for y in range(h))
     north = ((Point(x, 0 + 0), S) for x in range(w))
     south = ((Point(x, h - 1), N) for x in range(w))
 
@@ -56,7 +56,6 @@ if __name__ == "__main__":
 
     # Part 2
     energy_levels = (
-        len(fire_laser(grid, pos, vel))
-        for pos, vel in starting_configurations(grid)
+        len(fire_laser(grid, pos, vel)) for pos, vel in starting_configurations(grid)
     )
     print(max(energy_levels))

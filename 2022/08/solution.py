@@ -1,5 +1,5 @@
+from functools import partial, reduce
 from operator import mul
-from functools import reduce, partial
 
 
 def scan(x, y, heightmap):

@@ -1,4 +1,4 @@
-from itertools import product, batched
+from itertools import batched, product
 from typing import Iterator
 
 DIAGS = {(1, 1), (1, -1), (-1, 1), (-1, -1)}

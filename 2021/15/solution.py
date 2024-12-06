@@ -1,5 +1,5 @@
-from itertools import repeat
 import heapq
+from itertools import repeat
 
 
 def cost(grid, x, y):
@@ -42,7 +42,8 @@ def minimum_risk(grid, source=(0, 0), target=(99, 99)):
 
 if __name__ == "__main__":
     grid = [
-        [int(cell) for cell in line.strip()] for line in open("data.in", "r").readlines()
+        [int(cell) for cell in line.strip()]
+        for line in open("data.in", "r").readlines()
     ]
 
     print(minimum_risk(grid, target=(99, 99)))

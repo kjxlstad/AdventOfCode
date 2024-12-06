@@ -1,7 +1,7 @@
 from collections import namedtuple
 from itertools import combinations
 
-from z3 import IntVector, Solver, And
+from z3 import And, IntVector, Solver
 
 Vec = namedtuple("Vec", "x y z")
 Ray = namedtuple("Ray", "pos vel")

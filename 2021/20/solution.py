@@ -18,7 +18,10 @@ def enhance(image, algo, n=1):
     x_range, y_range = pad(image)
 
     enhanced = {
-        (i, j) for i in x_range for j in y_range if next_lit(algo, n, window(i, j, image))
+        (i, j)
+        for i in x_range
+        for j in y_range
+        if next_lit(algo, n, window(i, j, image))
     }
 
     return enhance(enhanced, algo, n - 1)

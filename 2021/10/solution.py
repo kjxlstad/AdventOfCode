@@ -12,7 +12,9 @@ def add(a, b):
 def autocomplete_score(stack, error):
     # Only score autocomplete if expression was error free
     return (
-        0 if error else reduce(lambda a, b: a * 5 + OPEN.index(b) + 1, reversed(stack), 0)
+        0
+        if error
+        else reduce(lambda a, b: a * 5 + OPEN.index(b) + 1, reversed(stack), 0)
     )
 
 
@@ -39,11 +41,13 @@ if __name__ == "__main__":
     lines = [line.strip() for line in open("data.in", "r").readlines()]
 
     # Compute scores, remove entires of zero in autocomplete_scores
-    syntax_scores, autocomplete_scores = zip(*(parse(expression) for expression in lines))
+    syntax_scores, autocomplete_scores = zip(
+        *(parse(expression) for expression in lines)
+    )
     autocomplete_scores = list(filter(None, autocomplete_scores))
 
     # Part 1
     print(sum(syntax_scores))
 
-    # Part 2    
+    # Part 2
     print(sorted(autocomplete_scores)[len(autocomplete_scores) // 2])

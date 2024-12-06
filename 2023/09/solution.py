@@ -13,8 +13,7 @@ def extrapolate(sequence, accum):
 if __name__ == "__main__":
     with open("data.in") as oasis_report:
         sequences = [
-            [int(n) for n in line.split()]
-            for line in oasis_report.read().split("\n")
+            [int(n) for n in line.split()] for line in oasis_report.read().split("\n")
         ]
 
     # Part 1

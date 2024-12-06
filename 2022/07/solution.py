@@ -1,11 +1,16 @@
 from collections import defaultdict
 
+
 def update_tree(cmd, tree, path):
     match cmd.split(" "):
-        case ["$", "cd", ".."]: path.pop()
-        case ["$", "cd", p]: path.append(p)
-        case ["$", "ls"] | ["dir", _]: pass
-        case [size, _]: update_size(tree, path, int(size))
+        case ["$", "cd", ".."]:
+            path.pop()
+        case ["$", "cd", p]:
+            path.append(p)
+        case ["$", "ls"] | ["dir", _]:
+            pass
+        case [size, _]:
+            update_size(tree, path, int(size))
 
 
 def update_size(tree, path, size):

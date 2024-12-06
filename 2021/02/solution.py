@@ -6,9 +6,9 @@ cmds = [(cmd, int(mag)) for cmd, mag in data]
 
 # Part 1 & 2
 actions = {
-    "up":      lambda a, b: (a[0],     a[1],            a[2] - b),
-    "down":    lambda a, b: (a[0],     a[1],            a[2] + b),
-    "forward": lambda a, b: (a[0] + b, a[1] + a[2] * b, a[2]    ),
+    "up": lambda a, b: (a[0], a[1], a[2] - b),
+    "down": lambda a, b: (a[0], a[1], a[2] + b),
+    "forward": lambda a, b: (a[0] + b, a[1] + a[2] * b, a[2]),
 }
 
 

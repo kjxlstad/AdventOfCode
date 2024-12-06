@@ -8,14 +8,14 @@ def cover(line, include_diag=False):
     x_range, y_range = [
         range(ax[0], ax[1] + dirs[i], dirs[i]) for i, ax in enumerate(zip(*line))
     ]
-    
+
     # In case of horizontal or vertical pad zip with the stationary value
     fill = list(x_range)[0] if len(x_range) == 1 else list(y_range)[0]
     diagonal = len(x_range) != 1 and len(y_range) != 1
-    
+
     if diagonal and not include_diag:
         return ()
-    
+
     return (p for p in zip_longest(x_range, y_range, fillvalue=fill))
 
 

@@ -1,5 +1,5 @@
+from functools import reduce
 from itertools import count
-from functools import reduce, partial
 
 
 def transpose(platform):
@@ -14,23 +14,21 @@ def as_transposed(func):
     # Transpose before and after to use roll_west as roll_south
     def wrapper(matrix, *args):
         return transpose(func(transpose(matrix), *args))
+
     return wrapper
 
 
 def tilt_west(platform):
     def roll(part):
         return "O" * part.count("O") + "." * part.count(".")
-    
+
     return [
-        "#".join(roll(part) for part in "".join(row).split("#"))
-        for row in platform
+        "#".join(roll(part) for part in "".join(row).split("#")) for row in platform
     ]
 
 
 def load(platform):
-    return sum(
-        row.count("O") * (len(row) - i) for i, row in enumerate(platform)
-    )
+    return sum(row.count("O") * (len(row) - i) for i, row in enumerate(platform))
 
 
 def cycle_once(platform):

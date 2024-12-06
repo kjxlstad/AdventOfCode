@@ -4,12 +4,18 @@ N, E, S, W = (0, -1), (+1, 0), (0, +1), (-1, 0)
 
 # (pipe, prev_move): next_move
 MOVES = {
-    ("|", S): S, ("|", N): N,
-    ("-", E): E, ("-", W): W,
-    ("L", W): N, ("L", S): E,
-    ("J", E): N, ("J", S): W,
-    ("7", E): S, ("7", N): W,
-    ("F", W): S, ("F", N): E,
+    ("|", S): S,
+    ("|", N): N,
+    ("-", E): E,
+    ("-", W): W,
+    ("L", W): N,
+    ("L", S): E,
+    ("J", E): N,
+    ("J", S): W,
+    ("7", E): S,
+    ("7", N): W,
+    ("F", W): S,
+    ("F", N): E,
 }
 
 CONNECTIONS = {
@@ -46,10 +52,10 @@ def find_path(tiles, x, y):
 def find_area(path):
     # Needs to wrap around back to the start
     path_around = path + [path[0]]
-    return sum(
-        x_0 * y_1 - x_1 * y_0
-        for ((x_0, y_0), (x_1, y_1)) in pairwise(path_around)
-    ) // 2
+    return (
+        sum(x_0 * y_1 - x_1 * y_0 for ((x_0, y_0), (x_1, y_1)) in pairwise(path_around))
+        // 2
+    )
 
 
 def enclosed_area(area, boundary_length):

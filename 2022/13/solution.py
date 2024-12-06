@@ -1,12 +1,15 @@
-from functools import cmp_to_key
 from ast import literal_eval
+from functools import cmp_to_key
 
 
 def compare(left, right):
     match left, right:
-        case  int(),  int(): return left - right
-        case  int(), list(): return compare([left], right)
-        case list(),  int(): return compare(left, [right])
+        case int(), int():
+            return left - right
+        case int(), list():
+            return compare([left], right)
+        case list(), int():
+            return compare(left, [right])
     return next(filter(bool, map(compare, left, right)), len(left) - len(right))
 
 

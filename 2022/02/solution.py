@@ -18,11 +18,7 @@ if __name__ == "__main__":
         guide = f.read().strip().split("\n")
 
     # Part 1
-    print(
-        sum(score_conter(play, counter) for play, counter in map(parse, guide))
-    )
+    print(sum(score_conter(play, counter) for play, counter in map(parse, guide)))
 
     # Part 2
-    print(
-        sum(score_outcome(play, outcome) for play, outcome in map(parse, guide))
-    )
+    print(sum(score_outcome(play, outcome) for play, outcome in map(parse, guide)))

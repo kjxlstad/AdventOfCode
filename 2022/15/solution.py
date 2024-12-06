@@ -15,13 +15,10 @@ def not_beacon(scanners, row):
     impossible = set()
 
     for scanner in scanners:
-
         impossible.update(
             val
             for y in (-scanner.r, scanner.r)
-            for val in remaining(
-                scanner, scanner.r - abs(row - scanner.y), row, y
-            )
+            for val in remaining(scanner, scanner.r - abs(row - scanner.y), row, y)
         )
 
     return len(impossible) - 1

@@ -1,6 +1,5 @@
 import re
 
-
 MUL_PATTERN = r"mul\((\d+),(\d+)\)"
 DOMUL_PATTERN = rf"(do)\(\)|(don't)\(\)|{MUL_PATTERN}"
 

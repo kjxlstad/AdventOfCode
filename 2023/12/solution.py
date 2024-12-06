@@ -17,7 +17,7 @@ def arrangements(springs, hints):
     if not len(hints):
         # 1. Springs not covered by hints, impossible, nullify this branch
         # 2. All springs covered by hints, we are done
-        return int(not "#" in springs)
+        return int("#" not in springs)
 
     # If the leftover hints cover more than the remaining springs
     # then it is impossible to satisfy the hints, nullify this branch

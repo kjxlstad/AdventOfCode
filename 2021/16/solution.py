@@ -1,5 +1,5 @@
-from operator import gt, lt, eq
 from math import prod
+from operator import eq, gt, lt
 
 
 def unpack(func):

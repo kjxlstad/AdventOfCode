@@ -1,5 +1,5 @@
-from itertools import cycle
 from functools import partial
+from itertools import cycle
 from math import lcm
 
 
@@ -23,9 +23,7 @@ if __name__ == "__main__":
     with open("data.in", "r") as f:
         instructions, network = parse(f.read())
 
-    path_length = partial(
-        find_path_length, instructions=instructions, network=network
-    )
+    path_length = partial(find_path_length, instructions=instructions, network=network)
 
     # Part 1
     print(path_length("AAA", end_condition=lambda x: x == "ZZZ"))

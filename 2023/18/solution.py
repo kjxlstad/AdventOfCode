@@ -1,11 +1,20 @@
 from collections import namedtuple
-from itertools import pairwise, accumulate, starmap
+from itertools import accumulate, pairwise, starmap
 
 Vec = namedtuple("Point", ["x", "y"])
 
-def add(vec0, vec1):  return Vec(vec0.x + vec1.x, vec0.y + vec1.y)
-def mul(vec, scalar): return Vec(vec.x * scalar, vec.y * scalar)
-def det(vec0, vec1):  return vec0.x * vec1.y - vec1.x * vec0.y
+
+def add(vec0, vec1):
+    return Vec(vec0.x + vec1.x, vec0.y + vec1.y)
+
+
+def mul(vec, scalar):
+    return Vec(vec.x * scalar, vec.y * scalar)
+
+
+def det(vec0, vec1):
+    return vec0.x * vec1.y - vec1.x * vec0.y
+
 
 DIRECTION_NAMES = {"U": Vec(0, -1), "R": Vec(+1, 0), "D": Vec(0, +1), "L": Vec(-1, 0)}
 DIRECTION_NUMS = {i: vec for i, vec in enumerate(DIRECTION_NAMES.values())}

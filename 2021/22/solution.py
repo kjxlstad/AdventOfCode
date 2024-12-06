@@ -1,6 +1,6 @@
-from re import findall
 from collections import namedtuple
-from functools import partial, reduce
+from functools import reduce
+from re import findall
 
 span = namedtuple("span", ["min", "max"])
 cube = namedtuple("cube", ["x", "y", "z"])
@@ -19,7 +19,9 @@ def count(steps, volume):
     return (
         volume(step.cube)
         + count(rest, volume)
-        - count({intersection(step.cube, other.cube) for other in rest} - {None}, volume)
+        - count(
+            {intersection(step.cube, other.cube) for other in rest} - {None}, volume
+        )
     )
 
 

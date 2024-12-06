@@ -1,6 +1,6 @@
-from operator import add, mul
-from functools import reduce
 from copy import deepcopy
+from functools import reduce
+from operator import add, mul
 
 
 class Monkey:
@@ -33,7 +33,8 @@ def round(monkeys, worry_reducer):
 
 
 def monkey_business(monkeys, rounds, worry_reducer):
-    for _ in range(rounds): round(monkeys, worry_reducer)
+    for _ in range(rounds):
+        round(monkeys, worry_reducer)
     return mul(*sorted(monkey.inspected for monkey in monkeys)[-2:])
 
 

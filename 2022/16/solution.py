@@ -1,13 +1,11 @@
+from collections import defaultdict
 from functools import cache
 from itertools import product, tee
-from collections import defaultdict
 
 
 def floyd_warshall_fill(valves, distances):
     for k, i, j in product(*tee(valves, 3)):
-        distances[i, j] = min(
-            distances[i, j], distances[i, k] + distances[k, j]
-        )
+        distances[i, j] = min(distances[i, j], distances[i, k] + distances[k, j])
 
 
 def parse_valves(lines):

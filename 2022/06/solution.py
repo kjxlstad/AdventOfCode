@@ -1,11 +1,6 @@
-from itertools import tee
-
-
 def processed_before_marker(datastream, markersize):
     chunks = (datastream[i : i + markersize] for i, _ in enumerate(datastream))
-    processed = next(
-        i for i, c in enumerate(chunks) if len(set(c)) == markersize
-    )
+    processed = next(i for i, c in enumerate(chunks) if len(set(c)) == markersize)
     return processed + markersize
 
 

@@ -1,6 +1,6 @@
 from functools import reduce
+from math import ceil, floor, sqrt, ulp
 from operator import mul
-from math import ceil, floor, ulp, sqrt
 
 
 def parse_line(line, ignore_spaces):

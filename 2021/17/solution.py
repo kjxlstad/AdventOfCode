@@ -5,7 +5,9 @@ Target = namedtuple("Target", ["min", "max"])
 
 
 def in_target(target, pos):
-    return target.min.x <= pos.x <= target.max.x and target.min.y <= pos.y <= target.max.y
+    return (
+        target.min.x <= pos.x <= target.max.x and target.min.y <= pos.y <= target.max.y
+    )
 
 
 def step(pos, vel):
@@ -15,7 +17,10 @@ def step(pos, vel):
 
 
 def trajectory(pos, vel, target):
-    if abs(pos.x) <= max(abs(target.min.x), abs(target.max.x)) and target.min.y <= pos.y:
+    if (
+        abs(pos.x) <= max(abs(target.min.x), abs(target.max.x))
+        and target.min.y <= pos.y
+    ):
         return in_target(target, pos) or trajectory(*step(pos, vel), target)
 
     return False

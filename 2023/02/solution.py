@@ -1,5 +1,5 @@
-from itertools import groupby
 from functools import reduce
+from itertools import groupby
 from operator import mul
 
 COLORS = "red", "green", "blue"
@@ -16,9 +16,7 @@ def parse_game(game):
     game_id = int(game_id.split(" ")[1])
 
     all_cubes = sorted(
-        parse_cube(cube)
-        for set in num_cubes.split(";")
-        for cube in set.split(",")
+        parse_cube(cube) for set in num_cubes.split(";") for cube in set.split(",")
     )
 
     num_cubes = {

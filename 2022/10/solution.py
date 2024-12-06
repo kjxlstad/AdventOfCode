@@ -26,8 +26,7 @@ def pixel(register, x):
 
 def render(register_values):
     pixels = [
-        [pixel(register_values[y * 40 + x], x) for x in range(40)]
-        for y in range(6)
+        [pixel(register_values[y * 40 + x], x) for x in range(40)] for y in range(6)
     ]
     return "\n".join("".join(row) for row in pixels)
 

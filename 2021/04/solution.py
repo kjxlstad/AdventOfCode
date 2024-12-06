@@ -8,8 +8,7 @@ def parse_data(data):
 
     # Split into triple nested list of int
     cards = [
-        [[int(n) for n in row.split(" ") if len(n)] for row in card]
-        for card in cards
+        [[int(n) for n in row.split(" ") if len(n)] for row in card] for card in cards
     ]
 
     return balls, cards
@@ -34,9 +33,7 @@ def winning_turn(card, balls, turn=0):
 
 
 def score(card, winning_turn, balls):
-    not_picked = [
-        n for row in card for n in row if n not in balls[:winning_turn]
-    ]
+    not_picked = [n for row in card for n in row if n not in balls[:winning_turn]]
     return sum(not_picked) * balls[winning_turn - 1]
 
 

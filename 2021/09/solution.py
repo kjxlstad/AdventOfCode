@@ -5,9 +5,7 @@ def neighbors(x, y, bounds):
     neighbors = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
 
     # Filter out neighbors outside of bounds
-    return set(
-        filter(lambda pos: all(val in range(*bounds) for val in pos), neighbors)
-    )
+    return set(filter(lambda pos: all(val in range(*bounds) for val in pos), neighbors))
 
 
 def low_points(heightmap, bounds):
@@ -29,9 +27,7 @@ def search_basin(heightmap, x, y):
     }
 
     # Return union of this point and all points in sub search
-    return {(x, y)}.union(
-        *(search_basin(heightmap, i, j) for i, j in increasing)
-    )
+    return {(x, y)}.union(*(search_basin(heightmap, i, j) for i, j in increasing))
 
 
 if __name__ == "__main__":

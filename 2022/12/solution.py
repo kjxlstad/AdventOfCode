@@ -37,8 +37,10 @@ def shortest_climb(heightmap, start_points, end):
     while queue:
         x, y, steps = queue.popleft()
 
-        if (x, y) == end: return steps
-        if (x, y) in visited: continue
+        if (x, y) == end:
+            return steps
+        if (x, y) in visited:
+            continue
         visited.add((x, y))
 
         for x, y in neighbors(heightmap, x, y):

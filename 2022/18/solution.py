@@ -1,6 +1,3 @@
-from itertools import permutations
-from functools import reduce
-from operator import xor
 from collections import deque
 
 
@@ -16,9 +13,7 @@ def faces(x, y, z):
 
 
 def count(droplets, predicate):
-    return sum(
-        predicate(face) for droplet in droplets for face in faces(*droplet)
-    )
+    return sum(predicate(face) for droplet in droplets for face in faces(*droplet))
 
 
 def neighbors(current, droplets, seen):

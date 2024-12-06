@@ -1,10 +1,12 @@
+from collections import namedtuple
 from functools import reduce
 from itertools import permutations
 from math import ceil
-from collections import namedtuple
 
 # Instead of dealing with trees, parse input into value and depth
 number = namedtuple("number", ("value", "depth"))
+
+DEPTH_CHANGE = {"[": 1, " ": 0, ",": 0, "]": -1}
 
 
 def parse_depths(num, depth=0):
@@ -12,8 +14,6 @@ def parse_depths(num, depth=0):
         return []
 
     literal, *rest = num
-
-    DEPTH_CHANGE = {"[": 1, " ": 0, ",": 0, "]": -1}
 
     if literal in DEPTH_CHANGE:
         return parse_depths(rest, depth + DEPTH_CHANGE[literal])

@@ -22,9 +22,8 @@ def transpose(pattern):
 
 
 def mirror_summary(pattern, num_smudges=0):
-    return (
-        100 * mirror_index(pattern, num_smudges)
-            + mirror_index(transpose(pattern), num_smudges)
+    return 100 * mirror_index(pattern, num_smudges) + mirror_index(
+        transpose(pattern), num_smudges
     )
 
 

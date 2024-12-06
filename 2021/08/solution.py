@@ -1,7 +1,13 @@
 from functools import reduce
 
 # Code follows standard 7-segment display pin convention a-g
-# a: top, b: upper right, c: lower left, d: bottom, e: lower left, f: upper left, g: middle
+# a: top,
+# b: upper right,
+# c: lower left,
+# d: bottom,
+# e: lower left,
+# f: upper left,
+# g: middle
 
 # Lit segments per number
 SEGMENTS = (
@@ -45,12 +51,14 @@ def infer_wiring(encoded):
 def decode_pattern(wiring, output):
     # Calculate the lit segments for each figure
     segments = [
-        [int(any(segment in wire for segment in number)) for wire in wiring] for number in output
+        [int(any(segment in wire for segment in number)) for wire in wiring]
+        for number in output
     ]
 
     # Chain together to full number
     return reduce(
-        lambda a, b: a * 10 + b, (SEGMENTS.index(tuple(segment)) for segment in segments),
+        lambda a, b: a * 10 + b,
+        (SEGMENTS.index(tuple(segment)) for segment in segments),
     )
 
 
@@ -60,11 +68,15 @@ def decode_output(patterns, output):
 
     # Corresponding segments to input pattern
     segments = lambda p: [
-        {*pattern} for pattern in patterns if possible_numbers(pattern) == possible_numbers(p)
+        {*pattern}
+        for pattern in patterns
+        if possible_numbers(pattern) == possible_numbers(p)
     ]
 
     # Number(s): (list of) corresponding set of segments
-    correspondences = {possible_numbers(pattern): segments(pattern) for pattern in patterns}
+    correspondences = {
+        possible_numbers(pattern): segments(pattern) for pattern in patterns
+    }
 
     wiring = infer_wiring(correspondences)
 
@@ -79,10 +91,12 @@ if __name__ == "__main__":
     ]
 
     # Part 1: Total count of number of patterns with unique lengths
-    print(sum(
-        len([pattern for pattern in output if len(pattern) in {2, 3, 4, 7}])
-        for _, output in lines
-    ))
+    print(
+        sum(
+            len([pattern for pattern in output if len(pattern) in {2, 3, 4, 7}])
+            for _, output in lines
+        )
+    )
 
     # Part 2
     print(sum(decode_output(*line) for line in lines))

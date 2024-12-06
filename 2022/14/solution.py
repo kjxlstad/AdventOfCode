@@ -1,4 +1,4 @@
-from itertools import pairwise, chain
+from itertools import chain, pairwise
 
 
 def below(x, y):

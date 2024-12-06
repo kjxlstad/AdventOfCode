@@ -1,5 +1,5 @@
-from z3 import Solver, Int, Not, Or, And, sat
 from rich.progress import track
+from z3 import And, Int, Not, Or, Solver, sat
 
 
 def parse_line(line):
@@ -8,14 +8,14 @@ def parse_line(line):
 
 
 def add_constraints(solver, springs, groups):
-    N = len(springs)
+    n = len(springs)
     num_groups = len(groups)
 
     group_starts = [Int(f"start_{i}") for i in range(num_groups)]
     group_ends = [Int(f"end_{i}") for i in range(num_groups)]
 
     # Encode facts
-    for k in range(N):
+    for k in range(n):
         if springs[k] == ".":
             # An empty cell can't be part of any group
             empty_constraints = [
@@ -35,9 +35,9 @@ def add_constraints(solver, springs, groups):
     # Encode constraint
     for start, end, group in zip(group_starts, group_ends, groups):
         # All starts must be on [0, N)
-        solver.add(0 <= start, start < N)
+        solver.add(0 <= start, start < n)
         # All ends must be on [0, N)
-        solver.add(0 <= end, end < N)
+        solver.add(0 <= end, end < n)
         # Difference between start and end is group size minus one
         solver.add(end - start == group - 1)
 
@@ -48,8 +48,8 @@ def add_constraints(solver, springs, groups):
     return group_starts, group_ends
 
 
-def format_model(model, group_start, group_end, N):
-    solution = ["."] * N
+def format_model(model, group_start, group_end, n):
+    solution = ["."] * n
     for start, end in zip(group_start, group_end):
         start = model[start].as_long()
         end = model[end].as_long()
@@ -62,11 +62,11 @@ def format_model(model, group_start, group_end, N):
 def find_all_models(springs, groups):
     solver = Solver()
     group_starts, group_ends = add_constraints(solver, springs, groups)
-    N = len(springs)
+    n = len(springs)
 
     while solver.check() == sat:
         model = solver.model()
-        yield format_model(model, group_starts, group_ends, N)
+        yield format_model(model, group_starts, group_ends, n)
 
         # Add a constraint to block the current solution
         block_constraint = [
@@ -87,8 +87,7 @@ if __name__ == "__main__":
         print(model)
 
     num_models = sum(
-        len(list(find_all_models(springs, blocks)))
-        for springs, blocks in track(lines)
+        len(list(find_all_models(springs, blocks))) for springs, blocks in track(lines)
     )
 
     print(num_models)

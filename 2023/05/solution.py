@@ -1,6 +1,6 @@
 import re
-from functools import reduce
 from collections import namedtuple
+from functools import reduce
 
 Interval = namedtuple("Interval", ["start", "length"])
 
@@ -38,7 +38,7 @@ def map_interval(interval, mappings):
         offset = interval.start - src
         if offset in range(len):
             cut = min(len - offset, interval.length)
-            
+
             return [Interval(dst + offset, cut)] + map_interval(
                 Interval(interval.start + cut, interval.length - cut), mappings
             )
@@ -67,8 +67,7 @@ if __name__ == "__main__":
 
     # Part 2
     seed_intervals = [
-        Interval(start, length)
-        for start, length in zip(seeds[0::2], seeds[1::2])
+        Interval(start, length) for start, length in zip(seeds[0::2], seeds[1::2])
     ]
 
     location_intervals = propogate(seed_intervals, rules, map_interval)

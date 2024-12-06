@@ -25,7 +25,9 @@ def flash(grid, flashed=set()):
     }
 
     grid = reduce(
-        lambda acc, coords: flashed_neighbors(acc, coords[0], coords[1]), flashes, grid,
+        lambda acc, coords: flashed_neighbors(acc, coords[0], coords[1]),
+        flashes,
+        grid,
     )
 
     if flashes:
