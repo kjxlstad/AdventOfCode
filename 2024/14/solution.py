@@ -1,56 +1,36 @@
 from functools import partial, reduce
 from itertools import batched
-from operator import itemgetter, mul
+from operator import mul
 from re import findall
 from typing import NamedTuple
 
 Vec = NamedTuple("Vec", [("x", int), ("y", int)])
-Robot = NamedTuple("Robot", [("pos", Vec), ("vel", Vec)])
 W, H = 101, 103
 
 
-def parse_robot(robot: str) -> Robot:
+def parse_robot(robot: str) -> tuple[Vec, Vec]:
     nums = batched(map(int, findall(r"-?\d+", robot)), 2)
-    return Robot(Vec(*next(nums)), Vec(*next(nums)))
+    return Vec(*next(nums)), Vec(*next(nums))
 
 
-def elapse(robots: list[Robot], seconds: int = 1) -> list[Robot]:
-    def step(robot: Robot) -> Robot:
-        new_x = (robot.pos.x + robot.vel.x * seconds) % W
-        new_y = (robot.pos.y + robot.vel.y * seconds) % H
-        return Robot(Vec(new_x, new_y), robot.vel)
-
-    return [step(robot) for robot in robots]
+def elapse(pos: Vec, vel: Vec, seconds: int) -> Vec:
+    new_x = (pos.x + vel.x * seconds) % W
+    new_y = (pos.y + vel.y * seconds) % H
+    return Vec(new_x, new_y)
 
 
-def safety_factor(robots: list[Robot]) -> int:
-    def between(p, lower, upper):
-        return lower.x <= p.x < upper.x and lower.y <= p.y < upper.y
+def safety_factor(robots: list[tuple[Vec, Vec]], seconds: int) -> int:
+    quadrants = [0] * 4
 
-    quadrant_checks = [
-        partial(between, lower=Vec(0, 0), upper=Vec(W // 2, H // 2)),
-        partial(between, lower=Vec(W // 2 + 1, 0), upper=Vec(W, H // 2)),
-        partial(between, lower=Vec(0, H // 2 + 1), upper=Vec(W // 2, H)),
-        partial(between, lower=Vec(W // 2 + 1, H // 2 + 1), upper=Vec(W, H)),
-    ]
+    for pos, vel in robots:
+        x, y = elapse(pos, vel, seconds)
 
-    quadrant_counts = (
-        sum(quadrant(robot.pos) for robot in robots) for quadrant in quadrant_checks
-    )
+        quadrants[0] += x < W // 2 and y < H // 2
+        quadrants[1] += x > W // 2 and y < H // 2
+        quadrants[2] += x < W // 2 and y > H // 2
+        quadrants[3] += x > W // 2 and y > H // 2
 
-    return reduce(mul, quadrant_counts)
-
-
-def deviation(robots: list[Robot], seconds: int) -> int:
-    return sum(
-        abs(robot.pos.x - W // 2) + abs(robot.pos.y - H // 2)
-        for robot in elapse(robots, seconds)
-    )
-
-
-def min_deviation_time(robots: list[Robot], max_seconds: int = 10_000) -> int:
-    deviations = ((s, deviation(robots, s)) for s in range(1, max_seconds))
-    return min(deviations, key=itemgetter(1))[0]
+    return reduce(mul, quadrants)
 
 
 if __name__ == "__main__":
@@ -58,7 +38,7 @@ if __name__ == "__main__":
     robots = [parse_robot(robot) for robot in data]
 
     # Part 1
-    print(safety_factor(elapse(robots, 100)))
+    print(safety_factor(robots, 100))
 
     # Part 2
-    print(min_deviation_time(robots))
+    print(min(range(10_000), key=partial(safety_factor, robots)))
