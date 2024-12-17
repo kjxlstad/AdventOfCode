@@ -8,8 +8,6 @@ BitVecRef.__rfloordiv__ = BitVecRef.__rtruediv__
 INSTRUCTIONS = "adv bxl bst jnz bxc out bdv cdv".split()
 
 
-# assumes last three instructions are adv, out, jnz
-# out, adv, jnz won't work with z3 because of yield order
 def execute(
     registers: dict[str, int | BitVecRef], program: list[int], loop: bool = False
 ) -> Iterator[int]:
@@ -42,8 +40,6 @@ def quinic_registers(program: list[int]) -> Iterator[int]:
 
     for instruction, output in zip(program, execute(registers, program, loop=True)):
         solver.add(instruction == output)
-
-    solver.add(registers["A"] == 0)
 
     while solver.check() == sat:
         model = solver.model().eval(a_init)
