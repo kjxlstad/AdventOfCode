@@ -1,24 +1,23 @@
 import re
 from typing import Iterator
+from operator import and_, or_, xor
+from functools import cache
 
 GATE_PATTERN = r"(\w+) ([A-Z]+) (\w+) -> (\w+)"
+
+OPS = {"AND": and_, "OR": or_, "XOR": xor}
 
 
 def simulate_circuit(
     state: dict[str, int], gates: dict[str, tuple[str, str, str]]
 ) -> Iterator[int]:
+    @cache
     def evaluate(wire: str) -> int:
         if wire in state:
             return state[wire]
 
         wire1, operator, wire2 = gates[wire]
-        match operator:
-            case "AND":
-                return evaluate(wire1) & evaluate(wire2)
-            case "XOR":
-                return evaluate(wire1) ^ evaluate(wire2)
-            case "OR":
-                return evaluate(wire1) | evaluate(wire2)
+        return OPS[operator](evaluate(wire1), evaluate(wire2))
 
     return (evaluate(wire) for wire in sorted(gates) if wire.startswith("z"))
 
