@@ -1,7 +1,19 @@
+[project]
+name = "adventofcode"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "advent-of-code-data>=2.1.0",
+    "ruff>=0.14.7",
+]
+
+[project.scripts]
+aoc = "init:main"
+
 [tool.ruff]
 line-length = 88
-target-version = "py313"
-
+target-version = "py314"
 
 [tool.ruff.lint]
 select =  ["E", "F", "I", "N", "W"]

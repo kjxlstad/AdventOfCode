@@ -12,7 +12,7 @@ def parse_args():
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main():
     args = parse_args()
 
     puzzle = get_puzzle(year=args.year, day=args.day, block=True)
@@ -25,3 +25,7 @@ if __name__ == "__main__":
     puzzle_dir.joinpath("solution.py").touch()
     puzzle_dir.joinpath("data.in").write_text(puzzle.input_data)
     puzzle_dir.joinpath("test.in").write_text(puzzle.examples[0].input_data)
+
+
+if __name__ == "__main__":
+    main()
